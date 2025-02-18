@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewpoint" content="width-divice-width, initial-scale=1.0">
+    <title>Vennly</title>
+    <style>
+      body{
+        font-family: Arial;
+        text-align: center;
+      }
+      .rect-clickable, path{
+        stroke: black;
+        stroke-width: 1px;
+        fill: white;
+      }
+      button{
+        height="100";
+        width="50%";
+      }
+      
+    </style>
+  </head>
+  <body>
+    <h1>diagram quiz</h1>
+    <p class="number-quiz">ข้อที่: กำลังโหลด...</p>
+    <p class="questions">กำลังโหลด</p>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="50%" width="50%" viewBox="0 0 120 120">
+        <rect class="rect-clickable" x="0" y="0" width="120" height="120" onclick="toggleColor(this, 128)" />
+
+        <path d="M 60 20 A 30 30 0 1 0 31 71 30 30 0 0 1 51 48 30 30 0 0 1 60 20" onclick="toggleColor(this, 1)" />
+        <path d="M 60 20 A 30 30 0 0 0 51 48 30 30 0 0 1 69 48 30 30 0 0 0 60 20" onclick="toggleColor(this, 2)" />
+        <path d="M 60 20 A 30 30 0 1 1 89 71 30 30 0 0 0 69 48 30 30 0 0 0 60 20" onclick="toggleColor(this, 4)" />
+        <path d="M 60 64 A 30 30 0 0 1 31 71 30 30 0 0 1 51 48 30 30 0 0 0 60 64" onclick="toggleColor(this, 8)" />
+        <path d="M 60 64 A 30 30 0 0 1 51 48 30 30 0 0 1 69 48 30 30 0 0 1 60 64" onclick="toggleColor(this, 16)" />
+        <path d="M 60 64 A 30 30 0 0 0 89 71 30 30 0 0 0 69 48 30 30 0 0 1 60 64" onclick="toggleColor(this, 32)" />
+        <path d="M 31 71 A 30 30 0 1 0 89 71 30 30 0 0 1 60 64 30 30 0 0 1 31 71" onclick="toggleColor(this, 64)" />
+
+        <text x="45" y="45">A</text>
+        <text x="75" y="45">B</text>
+        <text x="60" y="75">C</text>
+    </svg>
+    <br>
+    <button onclick="submit">submit</button>
+
+    <script>
+      let nowquiz=0;
+      let questions=[];
+      let selectedPath=0;
+
+      async function{
+        try{
+          let respone = await fetch("questions.json");
+          questions = await respone.json();
+          showQuiz();
+        }
+        catch(error){
+          console.error("error loading questions:",error)
+          documrnt.getElementById("questions").innerText="โหลดโจทยไม่สำเร็จ"
+    </script>
+  </body>
+  
+</html>
