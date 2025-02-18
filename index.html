@@ -23,7 +23,7 @@
   </head>
   <body>
     <h1>diagram quiz</h1>
-    <p class="number-quiz">ข้อที่: กำลังโหลด...</p>
+    <p class="numberQuiz">ข้อที่: กำลังโหลด...</p>
     <p class="questions">กำลังโหลด</p>
     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="50%" width="50%" viewBox="0 0 120 120">
         <rect class="rect-clickable" x="0" y="0" width="120" height="120" onclick="toggleColor(this, 128)" />
@@ -48,7 +48,7 @@
       let questions=[];
       let selectedPath=0;
 
-      async function{
+      async function loadQuiz(){
         try{
           let respone = await fetch("questions.json");
           questions = await respone.json();
@@ -57,6 +57,30 @@
         catch(error){
           console.error("error loading questions:",error)
           documrnt.getElementById("questions").innerText="โหลดโจทยไม่สำเร็จ"
+        }
+      }
+      function showQuiz(){
+        if(numberQuiz>=questions.length{
+          document.getElementById("questions").innerText="คุณทำครบทุกข้อแล้ว";
+          document.getElementById("numberQuiz").innerText="จบแบบทดสอบแล้ว";
+          return;
+        }
+        else{
+          let nowQuestion = quesions[nowQuiz];
+          document.getElementById("numberQuiz").innerText= 'โจทย์: ${nowQuestion}';
+          selectedPath = 0;
+          resetColor();
+        }
+      }
+
+      function resetColor(){
+        document.querySelectedAll("rect-clickable,path").forEach(el =>
+          {el.classlist.remove("clicked");});
+        selectedPath = 0;
+      }
+      window.onload = loadQuiz;
+        
+          
     </script>
   </body>
   
